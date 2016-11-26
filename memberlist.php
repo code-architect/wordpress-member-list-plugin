@@ -13,5 +13,9 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 define('CA_MEMBER_LIST_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
+// The short code
 require_once('include/ca-memberlist-shortcode.php');
+
+// The admin side plugin
+require_once('include/ca-memberlist-admin.php');
 ?>

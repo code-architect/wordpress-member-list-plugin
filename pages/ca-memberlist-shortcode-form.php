@@ -13,7 +13,7 @@ $formData = $wpdb->get_results($sql);
 if(!$formData)
 {
     $valid = false;
-    echo $sql.'<p>This form is invalid.</p>';
+    echo $sql.'<p>This form is invalid. No Data Found.</p>';
 }
 ?>
 <!-- Bootstrap -->

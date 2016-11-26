@@ -4,7 +4,7 @@
  *
  * Usage:   WP editor can add the short-code to list all members
  **********************************************************************************/
-
+// adding the short-code
 add_shortcode('ca_memberlist', 'ca_memberlist_user_form');
 
 
