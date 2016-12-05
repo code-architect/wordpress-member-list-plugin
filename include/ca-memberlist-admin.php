@@ -39,5 +39,43 @@ function memberlist_list()
         wp_die('You do not have sufficient permission');
     }
 
-    include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
+    memberlist_post_action();
 }
+
+
+/**********************************************************
+ * memberlist_post_action() - Handle Edit
+ *********************************************************/
+
+function memberlist_post_action()
+{
+    global $wpdb;
+    global $id;
+    if(!empty($_POST))
+    {
+        $listaction = $_POST['listaction'];
+        if(isset($_POST['memberid']))
+        {
+            $id = $_POST['memberid'];
+        }
+        switch($listaction){
+            case 'insert':
+                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist-insert.php';
+                break;
+            case 'edit':
+                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist-edit.php';
+                break;
+            case 'list':
+                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
+                break;
+            case 'handleupdate':
+            case 'handledelete':
+            case 'handleinsert':
+            default:
+                echo "<h2>Nothing Found!</h2>";
+        }
+    }else{
+        include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
+    }
+}
+
