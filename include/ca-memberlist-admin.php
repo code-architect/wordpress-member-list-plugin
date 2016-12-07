@@ -70,6 +70,9 @@ function memberlist_post_action()
                 break;
             case 'handleupdate':
             case 'handledelete':
+                handle_memberlist_delete();
+                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
+                break;
             case 'handleinsert':
             default:
                 echo "<h2>Nothing Found!</h2>";
@@ -79,3 +82,15 @@ function memberlist_post_action()
     }
 }
 
+/**********************************************************
+ * Handle Delete requests
+ *********************************************************/
+function handle_memberlist_delete()
+{
+    global $wpdb;
+    if(isset($_POST['memberid'])){
+        $id = $_POST['memberid'];
+        $sql = "DELETE FROM ".$wpdb->prefix."memberlist WHERE ca_id = ".$id;
+        $wpdb->query($sql);
+    }
+}

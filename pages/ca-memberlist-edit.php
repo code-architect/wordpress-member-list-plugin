@@ -26,7 +26,10 @@ $extra  =   $row->ca_extra;
             </div>
             <div class="panel-body">
 
-                <form action="#">
+                <form action="" method="post">
+
+                    <input type="hidden" name="memberid" value="<?php echo $id; ?>"/>
+
                     <div class="form-group">
                         <label for="frnName" class="col-sm-4 control-label">Name</label>
                         <div class="col-sm-8">
@@ -56,9 +59,12 @@ $extra  =   $row->ca_extra;
                     </div>
 
                     <div class="col-sm-8 col-sm-offset-4">
-                        <button type="submit" name="update" value="update" class="btn btn-primary">Update</button>
-                        <button type="submit" name="update" value="update" class="btn btn-warning">Cancel</button>
-                        <button type="submit" name="update" value="update" class="btn btn-danger">Delete</button>
+                        <button type="submit" name="listaction" value="handleupdate" class="btn btn-primary">Update</button>
+                        <button type="submit" name="listaction" value="list" class="btn btn-warning">Cancel</button>
+                        <button type="submit" name="listaction" value="handledelete" class="btn btn-danger"
+                                onclick="return confirm('Delete <?php echo $name; ?> from the records?')">
+                            Delete
+                        </button>
                     </div>
                 </form>
 
