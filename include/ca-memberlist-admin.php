@@ -53,6 +53,7 @@ function memberlist_post_action()
     global $id;
     if(!empty($_POST))
     {
+        $fields = ['name', ];
         $listaction = $_POST['listaction'];
         if(isset($_POST['memberid']))
         {
@@ -69,6 +70,9 @@ function memberlist_post_action()
                 include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
                 break;
             case 'handleupdate':
+                handle_memberlist_update();
+                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
+                break;
             case 'handledelete':
                 handle_memberlist_delete();
                 include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
@@ -88,9 +92,68 @@ function memberlist_post_action()
 function handle_memberlist_delete()
 {
     global $wpdb;
+    // check if the postr variable is set or not
     if(isset($_POST['memberid'])){
         $id = $_POST['memberid'];
         $sql = "DELETE FROM ".$wpdb->prefix."memberlist WHERE ca_id = ".$id;
         $wpdb->query($sql);
     }
 }
+
+
+/**********************************************************
+ * Handle Delete requests
+ *********************************************************/
+function handle_memberlist_update()
+{
+    global $wpdb;
+
+    $table = $wpdb->prefix.'memberlist';
+
+    if(isset($_POST['memberid']))
+    {
+        $id = $_POST['memberid'];
+    }
+
+    if(isset($_POST['name']))
+    {
+        $name = $_POST['name'];
+    }
+
+    if(isset($_POST['phone']))
+    {
+        $phone = $_POST['phone'];
+    }
+
+    if(isset($_POST['email']))
+    {
+        $email = $_POST['email'];
+    }
+
+    if(isset($_POST['extra']))
+    {
+        $extra = $_POST['extra'];
+    }
+
+    $wpdb->update(
+        $table,
+        [
+            'ca_name' => $name,
+            'ca_phone' => $phone,
+            'ca_email' => $email,
+            'ca_extra' => $extra
+        ],
+        ['ca_id'=> $id],
+        ['%s', '%s', '%s', '%s'],
+        ['%s']
+        );
+}
+
+
+
+
+
+
+
+
+

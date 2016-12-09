@@ -47,7 +47,7 @@ $extra  =   $row->ca_extra;
                     <div class="form-group">
                         <label for="frnEmail" class="col-sm-4 control-label">Email</label>
                         <div class="col-sm-8">
-                            <input type="email" class="form-control" name="email" value="<?php echo $email; ?>">
+                            <input type="email" class="form-control" name="email" value="<?php echo $email; ?>" required="">
                         </div>
                     </div>
 
@@ -62,7 +62,7 @@ $extra  =   $row->ca_extra;
                         <button type="submit" name="listaction" value="handleupdate" class="btn btn-primary">Update</button>
                         <button type="submit" name="listaction" value="list" class="btn btn-warning">Cancel</button>
                         <button type="submit" name="listaction" value="handledelete" class="btn btn-danger"
-                                onclick="return confirm('Delete <?php echo $name; ?> from the records?')">
+                                onclick="return confirm('Delete this records?')">
                             Delete
                         </button>
                     </div>
