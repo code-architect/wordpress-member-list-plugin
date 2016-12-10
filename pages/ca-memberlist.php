@@ -4,16 +4,10 @@
  *
  * Usage:   Display the member-list in a table
  **********************************************************************************/
+include CA_LIBRARY.'/Member.php';
+$member = new Member();
+$data = $member->fetch_all_member();
 
-global $wpdb;
-$valid = true;
-$sql = "SELECT * FROM ".$wpdb->prefix."memberlist";
-$formData = $wpdb->get_results($sql);
-if(!$formData)
-{
-    $valid = false;
-    echo '<p><h1>This form is invalid. No Data Found.</h1></p>';
-}
 ?>
 
     <div class="row">
@@ -33,8 +27,8 @@ if(!$formData)
                     <th>Extra</th>
                     <th>Action</th>
                 </tr>
-                <?php if($valid){
-                foreach($wpdb->get_results($sql) as $key => $row){
+                <?php if($data != false){
+                foreach($data as $row){
                 ?>
 
                 <form action="" method="post">
