@@ -5,14 +5,11 @@
  * Usage:   Display the member-list in a table
  **********************************************************************************/
 
-global $wpdb;
-$valid = true;
-$sql = "SELECT * FROM ".$wpdb->prefix."memberlist";
-$formData = $wpdb->get_results($sql);
+$member = new Member();
+$data = $member->fetch_all_member();
 
-if(!$formData)
+if($data == false)
 {
-    $valid = false;
     echo $sql.'<p>This form is invalid. No Data Found.</p>';
 }
 ?>
@@ -24,8 +21,8 @@ if(!$formData)
         <th>Email</th>
         <th>Extra</th>
     </tr>
-    <?php if($valid){
-        foreach($wpdb->get_results($sql) as $key => $row){
+    <?php if($data){
+        foreach($data as $key => $row){
     ?>
     <tr>
         <th><?php echo $row->ca_name; ?></th>
