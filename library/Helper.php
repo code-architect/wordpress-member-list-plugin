@@ -51,6 +51,20 @@ class Helper
     }
 
 
+//================================================================
+
+    public static function sanitize_array($array)
+    {
+        global $wpdb;
+        $new_array = [];
+
+        // escaping mysql_real_escape_string, special chars, and striping html tags
+        foreach($array as $key => $value)
+        {
+            $new_array[$key] = htmlspecialchars(strip_tags($wpdb->_real_escape($value)));
+        }
+        return $new_array;
+    }
 
 //================================================================
 
@@ -80,5 +94,51 @@ class Helper
         }
         // returning the array
         return $val;
+    }
+
+
+//================================================================
+
+
+    public static function member_post_action()
+    {
+        // instantiate member class
+        $member = new Member();
+
+        global $id;
+        if(!empty($_POST))
+        {
+
+            $listaction = $_POST['listaction'];
+            if(isset($_POST['ca_id']))
+            {
+                $id = $_POST['ca_id'];
+            }
+            switch($listaction){
+                case 'insert':
+                    include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist-insert.php';
+                    break;
+                case 'edit':
+                    include CA_PAGE.'/ca-memberlist-edit.php';
+                    break;
+                case 'list':
+                    include CA_PAGE.'/ca-memberlist.php';
+                    break;
+                case 'handleupdate':
+                    // Handle update
+                    $member->update_member();
+                    include CA_PAGE.'/ca-memberlist.php';
+                    break;
+                case 'handledelete':
+                    $member->delete_member($id);
+                    include CA_PAGE.'/ca-memberlist.php';
+                    break;
+                case 'handleinsert':
+                default:
+                    echo "<h2>Nothing Found!</h2>";
+            }
+        }else{
+            include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
+        }
     }
 }
