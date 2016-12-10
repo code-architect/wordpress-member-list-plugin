@@ -5,10 +5,7 @@
  * Usage:   Display the edit form for a single member
  **********************************************************************************/
 
-global $wpdb;
-
-$sql = "SELECT * FROM ".$wpdb->prefix."memberlist WHERE ca_id = ".$id;
-$row = $wpdb->get_row($sql);
+$row = $member->get_specific_rows($id);
 
 $name   =   $row->ca_name;
 $phone  =   $row->ca_phone;
@@ -28,33 +25,33 @@ $extra  =   $row->ca_extra;
 
                 <form action="" method="post">
 
-                    <input type="hidden" name="memberid" value="<?php echo $id; ?>"/>
+                    <input type="hidden" name="ca_id" value="<?php echo $id; ?>"/>
 
                     <div class="form-group">
                         <label for="frnName" class="col-sm-4 control-label">Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="name" value="<?php echo $name; ?>">
+                            <input type="text" class="form-control" name="ca_name" value="<?php echo $name; ?>">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="frnPhone" class="col-sm-4 control-label">Phone</label>
                         <div class="col-sm-8">
-                            <input type="phone" class="form-control" name="phone" value="<?php echo $phone; ?>">
+                            <input type="phone" class="form-control" name="ca_phone" value="<?php echo $phone; ?>">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="frnEmail" class="col-sm-4 control-label">Email</label>
                         <div class="col-sm-8">
-                            <input type="email" class="form-control" name="email" value="<?php echo $email; ?>" required="">
+                            <input type="email" class="form-control" name="ca_email" value="<?php echo $email; ?>" required="">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="frnExtra" class="col-sm-4 control-label">Extra</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="extra" value="<?php echo $extra; ?>">
+                            <input type="text" class="form-control" name="ca_extra" value="<?php echo $extra; ?>">
                         </div>
                     </div>
 

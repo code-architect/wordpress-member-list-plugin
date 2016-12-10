@@ -33,7 +33,7 @@ $data = $member->fetch_all_member();
                 <form action="" method="post">
                     <tr>
                         <input type="hidden" name="listaction" value="edit"/>
-                        <input type="hidden" name="memberid" value="<?php echo $row->ca_id; ?>"/>
+                        <input type="hidden" name="ca_id" value="<?php echo $row->ca_id; ?>"/>
                         <th><?php echo $row->ca_name; ?></th>
                         <th><?php echo $row->ca_phone; ?></th>
                         <th><?php echo $row->ca_email; ?></th>

@@ -16,6 +16,10 @@ define('CA_MEMBER_LIST_PLUGIN_DIR', plugin_dir_path(__FILE__));
 // define classes directory
 define('CA_LIBRARY', CA_MEMBER_LIST_PLUGIN_DIR.'/library');
 
+// define page directory
+define('CA_PAGE', CA_MEMBER_LIST_PLUGIN_DIR.'/pages');
+
+//-------------------------------------------------------------------
 include CA_LIBRARY.'/Helper.php';
 include CA_LIBRARY.'/Member.php';
 
