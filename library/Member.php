@@ -17,8 +17,11 @@ class Member
     }
 
 
-
-    //list function
+    /**
+     * Fetch all the members from the database
+     * @param string $id
+     * @return array|bool|null|object
+     */
     public function fetch_all_member($id = '')
     {
         global $wpdb;

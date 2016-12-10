@@ -4,6 +4,9 @@
  *
  **********************************************************************************/
 
+
+
+
 add_action('admin_menu', 'ca_memberlist_admin_menu');
 
 function ca_memberlist_admin_menu()
@@ -32,14 +35,13 @@ function ca_memberlist_admin_menu()
  *********************************************************/
 function memberlist_list()
 {
-    global $wpdb;
-
+    // check if current user have the permission
     if(!current_user_can('manage_options'))
     {
         wp_die('You do not have sufficient permission');
     }
 
-    memberlist_post_action();
+    Helper::member_post_action();
 }
 
 
@@ -47,44 +49,43 @@ function memberlist_list()
  * memberlist_post_action() - Handle Edit
  *********************************************************/
 
-function memberlist_post_action()
-{
-    global $wpdb;
-    global $id;
-    if(!empty($_POST))
-    {
-        $fields = ['name', ];
-        $listaction = $_POST['listaction'];
-        if(isset($_POST['memberid']))
-        {
-            $id = $_POST['memberid'];
-        }
-        switch($listaction){
-            case 'insert':
-                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist-insert.php';
-                break;
-            case 'edit':
-                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist-edit.php';
-                break;
-            case 'list':
-                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
-                break;
-            case 'handleupdate':
-                handle_memberlist_update();
-                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
-                break;
-            case 'handledelete':
-                handle_memberlist_delete();
-                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
-                break;
-            case 'handleinsert':
-            default:
-                echo "<h2>Nothing Found!</h2>";
-        }
-    }else{
-        include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
-    }
-}
+//function memberlist_post_action()
+//{
+//    global $id;
+//    if(!empty($_POST))
+//    {
+//
+//        $listaction = $_POST['listaction'];
+//        if(isset($_POST['memberid']))
+//        {
+//            $id = $_POST['memberid'];
+//        }
+//        switch($listaction){
+//            case 'insert':
+//                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist-insert.php';
+//                break;
+//            case 'edit':
+//                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist-edit.php';
+//                break;
+//            case 'list':
+//                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
+//                break;
+//            case 'handleupdate':
+//                handle_memberlist_update();
+//                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
+//                break;
+//            case 'handledelete':
+//                handle_memberlist_delete();
+//                include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
+//                break;
+//            case 'handleinsert':
+//            default:
+//                echo "<h2>Nothing Found!</h2>";
+//        }
+//    }else{
+//        include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
+//    }
+//}
 
 /**********************************************************
  * Handle Delete requests

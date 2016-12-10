@@ -4,8 +4,7 @@
  *
  * Usage:   Display the member-list in a table
  **********************************************************************************/
-include CA_LIBRARY.'/Member.php';
-$member = new Member();
+
 $data = $member->fetch_all_member();
 
 ?>
