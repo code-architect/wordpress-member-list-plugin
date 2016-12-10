@@ -10,8 +10,13 @@ License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 */
-
+// define root directory
 define('CA_MEMBER_LIST_PLUGIN_DIR', plugin_dir_path(__FILE__));
+
+// define classes directory
+define('CA_LIBRARY', CA_MEMBER_LIST_PLUGIN_DIR.'/library');
+
+
 
 // The short code
 require_once('include/ca-memberlist-shortcode.php');
