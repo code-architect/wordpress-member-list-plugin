@@ -90,9 +90,14 @@ class Member
     // Delete Member data
     public function delete_member($id)
     {
-        print_r($id);
+        global $wpdb;
+        $wpdb->delete(
+            $this->table,
+            ['ca_id' => $id],
+            ['%d']
+        );
     }
-    // delete function
+
 
     //insert function
 }
