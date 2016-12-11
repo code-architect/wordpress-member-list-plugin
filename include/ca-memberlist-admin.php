@@ -23,7 +23,7 @@ function ca_memberlist_admin_menu()
     add_submenu_page(
         'memberlist_list',      // parent slug
         'Add New Member',       // page title
-        'Add New',              // menu title
+        'Add New Member',       // menu title
         'manage_options',       //capabilities
         'memberlist_insert' ,   // menu slug
         'memberlist_insert'     // function
@@ -44,3 +44,22 @@ function memberlist_list()
     Helper::member_post_action();
 }
 
+/**********************************************************
+ * Insert New data into memberlist table                  *
+ *********************************************************/
+function memberlist_insert()
+{
+    // check if current user have the permission
+    if(!current_user_can('manage_options'))
+    {
+        wp_die('You do not have sufficient permission');
+    }
+
+    if(!empty($_POST))
+    {
+        Helper::member_post_action();
+    }else{
+        include CA_PAGE.'/ca-memberlist-insert.php';
+    }
+
+}

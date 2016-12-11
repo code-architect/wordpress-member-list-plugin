@@ -67,7 +67,9 @@ class Member
 //==============================================================================================
 
 
-    // update function
+    /**
+     * Update Member Data
+     */
     public function update_member()
     {
         global $wpdb;
@@ -87,7 +89,10 @@ class Member
 //==============================================================================================
 
 
-    // Delete Member data
+    /**
+     * Delete Member data by id
+     * @param $id
+     */
     public function delete_member($id)
     {
         global $wpdb;
@@ -99,5 +104,55 @@ class Member
     }
 
 
-    //insert function
+//==============================================================================================
+
+
+    /**
+     * Insert data into the database
+     * @return int
+     */
+    public function insert_member()
+    {
+        global $wpdb;
+
+        // remove unwanted data and sanitize data
+        $data = Helper::excluding_fields($_POST,'ca_', ['ca_id', 'listaction']);
+        $data = Helper::sanitize_array($data);
+
+        if($this->check_email_exists($data['ca_email']))
+        {
+           return 1;
+        }else
+        {
+            // check if the insert operation is a success
+            if($wpdb->insert($this->table,$data) === false )
+            {
+                return 2;
+            } else{
+                return 3;
+            }
+        }
+    }
+
+
+//==============================================================================================
+
+
+    private function check_email_exists($email)
+    {
+        global $wpdb;
+        $sql = "SELECT ca_id FROM ".$this->table." WHERE ca_email = '{$email}'";
+        $result = $wpdb->get_row($sql);
+
+        return $result;
+
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+//==============================================================================================
 }

@@ -38,4 +38,6 @@ require_once('include/ca-memberlist-admin.php');
 // Register style sheet.
 wp_enqueue_style( 'ca_plugin', "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
 
+wp_enqueue_script('ca_plugin', "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js");
+
 ?>
