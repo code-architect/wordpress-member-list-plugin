@@ -116,7 +116,7 @@ class Helper
             }
             switch($listaction){
                 case 'insert':
-                    include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist-insert.php';
+                    include CA_PAGE.'/ca-memberlist-insert.php';
                     break;
                 case 'edit':
                     include CA_PAGE.'/ca-memberlist-edit.php';
@@ -134,11 +134,52 @@ class Helper
                     include CA_PAGE.'/ca-memberlist.php';
                     break;
                 case 'handleinsert':
+                    $success_id = $member->insert_member();
+                    include CA_PAGE.'/ca-memberlist-insert.php';
+                    break;
                 default:
+
                     echo "<h2>Nothing Found!</h2>";
             }
         }else{
             include CA_MEMBER_LIST_PLUGIN_DIR.'/pages/ca-memberlist.php';
         }
     }
+
+
+//================================================================
+
+
+    /**
+     * Showing error
+     * @param $id
+     * @return string
+     */
+    public static function error_check($id)
+    {
+        if($id === 1)
+        {
+            return '<div class="alert alert-warning fade in">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Warning!</strong>Email id already exists!
+                    </div>';
+        }
+        if($id === 2)
+        {
+            return '<div class="alert alert-danger fade in">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Operation failedt!</strong>Something went wrong!
+                    </div>';
+        }
+        if($id === 3)
+        {
+            return '<div class="alert alert-success fade in">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Success!</strong> Member added..
+                    </div>';
+        }
+    }
+
+
+
 }
