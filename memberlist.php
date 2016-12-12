@@ -31,7 +31,7 @@ include CA_LIBRARY.'/Member.php';
  * Installing the table at the activation point of the plugin    *                                                *
  *****************************************************************/
 //
-function plugin_name_activation() {
+function ca_memberlist_activation() {
     require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
     global $wpdb;
     $db_table_name = $wpdb->prefix . 'memberlist';
@@ -54,7 +54,7 @@ function plugin_name_activation() {
         dbDelta( $sql );
     }
 }
-register_activation_hook(__FILE__, 'plugin_name_activation');
+register_activation_hook(__FILE__, 'ca_memberlist_activation');
 //-------------------------------------------------------------------
 
 
