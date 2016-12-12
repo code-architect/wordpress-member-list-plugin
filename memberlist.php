@@ -26,6 +26,39 @@ include CA_LIBRARY.'/Member.php';
 
 
 
+
+/*****************************************************************
+ * Installing the table at the activation point of the plugin    *                                                *
+ *****************************************************************/
+//
+function plugin_name_activation() {
+    require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
+    global $wpdb;
+    $db_table_name = $wpdb->prefix . 'memberlist';
+    if( $wpdb->get_var( "SHOW TABLES LIKE '$db_table_name'" ) != $db_table_name ) {
+        if ( ! empty( $wpdb->charset ) )
+            $charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
+        if ( ! empty( $wpdb->collate ) )
+            $charset_collate .= " COLLATE $wpdb->collate";
+
+        $sql = "CREATE TABLE " . $db_table_name . "
+			(
+			`ca_id` INT(11) NOT NULL AUTO_INCREMENT ,
+			`ca_name` VARCHAR(100) NOT NULL ,
+			`ca_phone` VARCHAR(20) NOT NULL ,
+			`ca_email` VARCHAR(100) NOT NULL ,
+			`ca_extra` VARCHAR(100) NOT NULL ,
+			PRIMARY KEY (`ca_id`)
+			)
+		  $charset_collate;";
+        dbDelta( $sql );
+    }
+}
+register_activation_hook(__FILE__, 'plugin_name_activation');
+//-------------------------------------------------------------------
+
+
+
 // The short code
 require_once('include/ca-memberlist-shortcode.php');
 
